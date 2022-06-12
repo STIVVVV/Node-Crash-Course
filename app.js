@@ -1,14 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 //express app
 const app = express();
 
+// connection to mongodb
+const dbURI = 'mongodb+srv://netninja:h2a6N8WTyTqqn3eO@nodetuts.l5qd5.mongodb.net/nodetuts?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {useNewURLParser: true, useUnifiedTopology: true})
+    .then((result) => app.listen(3000))
+    .catch((err) => console.log(err))
+
 //register view engine
 app.set('view engine', 'ejs')
-
-//listen for requests
-app.listen(3000);
 
 //middle ware aand static files
 app.use(express.static('public'))
